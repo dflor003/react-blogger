@@ -7,6 +7,11 @@
 node_modules
 npm-debug.log
 
+# Compiled files
+/dist
+/app/**/*.js
+/app/**/*.js.map
+
 # OS-specific
 .DS_STORE
 Thumbs.db
