@@ -10,7 +10,9 @@ npm-debug.log
 # Compiled files
 /dist
 /app/**/*.js
+/server/**/*.js
 /app/**/*.js.map
+/server/**/*.js.map
 
 # OS-specific
 .DS_STORE

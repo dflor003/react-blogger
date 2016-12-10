@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['babel', 'awesome-typescript-loader'],
+        loaders: ['babel', 'awesome-typescript-loader?configFileName=./app/tsconfig.json'],
         include: root('app')
       },
       {
