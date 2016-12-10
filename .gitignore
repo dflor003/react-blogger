@@ -1,0 +1,12 @@
+# IDE Settings
+.idea
+.vscode
+.vs
+
+# Node
+node_modules
+npm-debug.log
+
+# OS-specific
+.DS_STORE
+Thumbs.db
