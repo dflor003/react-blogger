@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FaviconsPlugin = require('favicons-webpack-plugin');
 
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
@@ -76,6 +77,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
+    new FaviconsPlugin(root('app', 'public', 'favicon.png')),
     new HtmlWebpackPlugin({
       template: 'app/index.html'
     })
