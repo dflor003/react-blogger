@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['babel', 'awesome-typescript-loader?configFileName=./app/tsconfig.json'],
+        loaders: ['react-hot', 'awesome-typescript-loader?configFileName=./app/tsconfig.json'],
         include: root('app')
       },
       {
@@ -46,12 +46,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: root('app'),
-        loader: ExtractTextPlugin.extract('style', 'css!sass')
+        exclude: root('app', 'components'),
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
       },
       {
         test: /\.scss$/,
-        include: root('app'),
+        include: root('app', 'components'),
         loaders: ['raw-loader', 'sass-loader']
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
         'ENV': JSON.stringify(isDebug ? 'DEV' : 'PRODUCTION')
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('css/[name].[hash].css'),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
