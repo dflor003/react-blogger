@@ -3,12 +3,14 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
+import { Request, Response } from 'express';
+import { NotFoundError, HttpError } from './utils/errors';
+import { HttpStatus } from './utils/http-status';
+import { connection } from './db'
 import uuid from 'uuid';
-import {Request, Response} from 'express';
-import {NotFoundError, HttpError} from './utils/errors';
 import logger from './utils/logger';
 import config from './config';
-import { HttpStatus } from './utils/http-status';
+import controllers from './controllers';
 
 const log = logger('STARTUP');
 
@@ -17,6 +19,9 @@ function run(root: string = __dirname): void {
   const app = express();
   const debug = config.debug;
   const port = config.port;
+
+  // Initialize db connection
+  connection().init(config);
 
   // CORS for client-side
   app.use(cors());
@@ -31,11 +36,7 @@ function run(root: string = __dirname): void {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   // Routes
-  app.get('/health', (req, res, next) => {
-    res.status(HttpStatus.OK).json({
-      up: true
-    });
-  });
+  controllers.forEach(controller => app.use(controller.routes()));
 
   // Catch-all 404 route
   app.use((req: Request, res: Response, next: Function) => {
@@ -96,6 +97,22 @@ function run(root: string = __dirname): void {
     })
     .on('SIGINT', () => server.close())
     .on('close', () => {
+      // All cleanup tasks
+      const cleanupTasks = [
+        () => connection().close()
+      ];
+
+      // Run all cleanup tasks but make sure
+      // they don't prevent shutdown
+      cleanupTasks.forEach(task => {
+        try {
+          task()
+        }
+        catch (error) {
+          log.error(`Error cleaning up!`, error);
+        }
+      });
+
       process.exit(0);
     });
 }

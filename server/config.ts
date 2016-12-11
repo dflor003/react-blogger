@@ -1,23 +1,25 @@
-const asInt = (envVarName: string, defaultValue: number): number => {
-  const intValue = parseInt(process.env[envVarName], 10);
-  return isNaN(intValue) ? defaultValue : intValue;
-};
+import { asBool, asInt, asString } from './utils/env-vars';
 
-const asString = (envVarName: string, defaultValue: string): string => process.env[envVarName] || defaultValue;
+export interface AppConfig {
+  debug: boolean;
+  port: number;
+  db: {
+    database: string;
+    username: string;
+    password: string;
+    server: string;
+    port: number;
+  };
+}
 
-const asBool = (envVarName: string, defaultValue: boolean): boolean => {
-  const value = (process.env[envVarName] || '').toLowerCase();
-  switch (value) {
-    case 'true' :
-      return true;
-    case 'false' :
-      return false;
-    default:
-      return defaultValue;
-  }
-};
-
-export default {
+export default <AppConfig>{
   debug: asBool('DEBUG', true),
-  port: asInt('PORT', 3001)
+  port: asInt('PORT', 3001),
+  db: {
+    database: asString('DB_DATABASE', null),
+    username: asString('DB_USER', null),
+    password: asString('DB_PASS', null),
+    server: asString('DB_SERVER', null),
+    port: asInt('DB_PORT', null),
+  }
 };
