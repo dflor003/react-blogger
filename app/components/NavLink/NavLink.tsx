@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Component, PropTypes} from 'react';
 import {RouterOnContext, Link} from 'react-router';
 
-export class NavLink extends Component<any, any> {
+export default class NavLink extends Component<any, any> {
   static propTypes = {
     to: PropTypes.string
   };

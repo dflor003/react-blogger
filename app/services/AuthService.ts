@@ -18,7 +18,11 @@ export class AuthService {
       }
     });
 
-    this.lock.on('authenticated', result => this._doAuthentication(result))
+    this.lock.on('authenticated', result => this.authenticate(result))
+  }
+
+  username(): string {
+    return 'Bob Builder';
   }
 
   isLoggedIn(): boolean {
@@ -41,7 +45,8 @@ export class AuthService {
     return this.storage.getItem(TokenKey);
   }
 
-  private _doAuthentication(authResult: any): void {
+  private authenticate(authResult: any): void {
+    console.log(authResult);
     const { idToken } = authResult;
     this.setToken(idToken);
     this.history.replace('/home');

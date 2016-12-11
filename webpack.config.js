@@ -13,7 +13,7 @@ const isDebug = true;
 
 module.exports = {
   debug: isDebug,
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: {
     polyfills: './app/polyfills.tsx',
     vendor: './app/vendor.tsx',
@@ -46,13 +46,17 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: root('app', 'components'),
+        exclude: [root('app', 'components'), root('app', 'views')],
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
       },
       {
         test: /\.scss$/,
-        include: root('app', 'components'),
-        loaders: ['raw-loader', 'sass-loader']
+        include: [root('app', 'components'), root('app', 'views')],
+        loaders: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader'
+        ]
       },
       {
         test: /\.png$/,
