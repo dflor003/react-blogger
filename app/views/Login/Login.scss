@@ -3,7 +3,7 @@ $login-width: 300px;
 $login-card-border-color: #ecf0f1;
 
 .root {
-  composes: card-3 from "../../styles/_mixins.scss";
+  composes: card-3 from "../../styles/_cards.scss";
 
   position: absolute;
   top: 25%;
@@ -17,8 +17,7 @@ $login-card-border-color: #ecf0f1;
   }
 
   .loginTitle {
-    text-align: center;
-    padding: 10px;
+    padding-bottom: 1rem;
     border-bottom: 1px solid $login-card-border-color;
   }
 
