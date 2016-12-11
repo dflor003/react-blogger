@@ -1,6 +1,7 @@
 import './styles/app.scss';
 import * as React from 'react';
 import {render} from 'react-dom';
-import { routes } from './routes';
 
-render(routes(), document.getElementById('root'));
+import AppRoutes from './routes';
+
+render(<AppRoutes />, document.getElementById('root'));

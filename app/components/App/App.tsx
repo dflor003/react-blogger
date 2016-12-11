@@ -1,31 +1,24 @@
 import * as React from 'react';
+import * as DocumentTitle from 'react-document-title';
 import { Component, PropTypes } from 'react';
 
 import Layout from '../Layout/Layout';
-import { AuthService } from '../../services/AuthService';
 
 export default class App extends Component<any, any> {
   static propTypes = {
     children: PropTypes.node
   };
 
-  static childContextTypes = {
-    auth: PropTypes.instanceOf(AuthService)
-  };
-
-  getChildContext() {
-    const clientId = '6PCPeiJR2EVqk2wf9QwiQ6eIEUBUc8hN';
-    const domain = 'danilf.auth0.com';
-    return {
-      auth: new AuthService(clientId, domain)
-    }
-  }
-
   render() {
+    const appTitle = 'React Blogger';
+    console.log('App', this.props);
+
     return (
-      <Layout>
-        {this.props.children}
-      </Layout>
+      <DocumentTitle title={appTitle}>
+        <Layout appName={appTitle}>
+          {this.props.children}
+        </Layout>
+      </DocumentTitle>
     );
   }
 }

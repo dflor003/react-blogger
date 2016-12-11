@@ -35,6 +35,11 @@ module.exports = {
         loaders: ['react-hot', 'awesome-typescript-loader?configFileName=./app/tsconfig.json'],
         include: root('app')
       },
+      // {
+      //   test: /\.js?$/,
+      //   loaders: ['babel-loader?presets[]=latest'],
+      //   include: [root('node_modules', 'react-icons')]
+      // },
       {
         test: /\.(html|css)$/,
         include: root('app'),

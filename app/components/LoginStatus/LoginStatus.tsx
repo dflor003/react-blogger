@@ -1,27 +1,18 @@
 import * as React from 'react';
+import * as styles from './LoginStatus.scss';
 import { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { AuthService } from '../../services/AuthService';
-import { ButtonToolbar, Button } from 'react-bootstrap';
-import styles from './LoginStatus.scss';
+import { Link, HistoryBase, hashHistory } from 'react-router';
+import { NavDropdown, MenuItem } from 'react-bootstrap';
 
-interface ILoginStatusProps {
-  auth: AuthService;
-}
+import AuthService from '../../services/AuthService';
+import MenuItemLink from '../MenuItemLink/MenuItemLink';
 
-const loggedInComponent = (userName: string) => (
-  <li className="dropdown">
-    <a href="#"
-       className="dropdown-toggle"
-       data-toggle="dropdown"
-       role="button">
-      Welcome {userName}! <span className="caret" />
-    </a>
-    <ul className="dropdown-menu">
-      <li role="separator" className="divider" />
-      <li><Link to="/logout">Logout</Link></li>
-    </ul>
-  </li>
+const loggedInComponent = (username: string, logout: any) => (
+  <NavDropdown id='loginStatus' title={`Logged in as ${username}`}>
+    <MenuItemLink to="/profile">Profile</MenuItemLink>
+    <MenuItem divider />
+    <MenuItem onClick={logout}>Logout</MenuItem>
+  </NavDropdown>
 );
 
 const loggedOutComponent = () => (
@@ -29,6 +20,10 @@ const loggedOutComponent = () => (
     <Link to="/login">Sign in</Link>
   </li>
 );
+
+interface ILoginStatusProps {
+  auth: AuthService;
+}
 
 export default class LoginStatus extends Component<ILoginStatusProps, any> {
   static propTypes = {
@@ -38,6 +33,13 @@ export default class LoginStatus extends Component<ILoginStatusProps, any> {
   render() {
     const auth = this.props.auth;
     const isLoggedIn = auth.isLoggedIn();
-    return isLoggedIn ? loggedInComponent(auth.username()) : loggedOutComponent();
+    return isLoggedIn
+      ? loggedInComponent(auth.getProfile().username, () => this.logout())
+      : loggedOutComponent();
+  }
+
+  private logout(): void {
+    this.props.auth.logout();
+    hashHistory.replace('/login');
   }
 }

@@ -21,7 +21,15 @@ $login-card-border-color: #ecf0f1;
     border-bottom: 1px solid $login-card-border-color;
   }
 
+  .loginLogo {
+    text-align: center;
+    margin: 15px;
+
+    img {
+      width: 80px;
+    }
+  }
+
   .instructions {
-    margin-bottom: 3rem;
   }
 }

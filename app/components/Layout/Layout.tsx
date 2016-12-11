@@ -1,13 +1,15 @@
 import * as React from 'react';
+import * as styles from './Layout.scss';
 import { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+
 import NavLink from '../NavLink/NavLink';
 import LoginStatus from '../LoginStatus/LoginStatus';
-import { AuthService } from '../../services/AuthService';
-import * as styles from './Layout.scss';
-console.log(styles.root);
+import AuthService from '../../services/AuthService';
+
 export default class Layout extends Component<any, any> {
   static propTypes = {
+    appName: PropTypes.string,
     children: PropTypes.node
   };
 
@@ -16,8 +18,9 @@ export default class Layout extends Component<any, any> {
   };
 
   render() {
-    const appName = 'React Blogger';
+    const appName = this.props.appName;
     const children = this.props.children;
+    console.log('Layout', this.props);
 
     return (
       <div className={styles.root}>

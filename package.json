@@ -53,15 +53,14 @@
     "path": "^0.12.7",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
+    "react-document-title": "^2.0.2",
     "react-dom": "^15.4.1",
+    "react-icons": "^2.2.1",
     "react-router": "^3.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.0.0-beta.10",
-    "babel-core": "^6.20.0",
-    "babel-loader": "^6.2.9",
-    "babel-plugin-react-transform": "^2.0.2",
     "css-loader": "^0.26.1",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
