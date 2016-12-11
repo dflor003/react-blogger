@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { Component, PropTypes } from 'react';
+import {Link} from 'react-router';
+import { NavLink } from '../NavLink/NavLink';
 
-export default class Layout extends React.Component<any, any> {
+export default class Layout extends Component<any, any> {
   static propTypes = {
-    children: React.PropTypes.node
+    children: PropTypes.node
   };
 
   render() {
@@ -20,21 +23,19 @@ export default class Layout extends React.Component<any, any> {
                 data-toggle="collapse"
                 data-target="nav-collapse">
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
               </button>
 
-              <a className="navbar-brand">
+              <Link className="navbar-brand" to="/home">
                 {appName}
-              </a>
+              </Link>
             </div>
 
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
-                <li className="active">
-                  <a>Home</a>
-                </li>
+                <NavLink to="/home">Home</NavLink>
               </ul>
             </div>
           </div>
