@@ -23,7 +23,8 @@ export const PostType: any = new GraphQLObjectType({
     },
     datetime: {
       type: GraphQLString,
-      description: `The date and time that the post was created`
+      description: `The date and time that the post was created`,
+      resolve: (source: any) => source.datetime.toISOString()
     },
     author: {
       type: UserType,

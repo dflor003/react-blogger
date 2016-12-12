@@ -19,13 +19,8 @@ export const CommentType = new GraphQLObjectType({
     },
     datetime: {
       type: GraphQLString,
-      description: `The date and time that the post was created`
-    },
-    createdAt: {
-      type: GraphQLString
-    },
-    updatedAt: {
-      type: GraphQLString
+      description: `The date and time that the post was created`,
+      resolve: (source: any) => source.datetime.toISOString()
     },
     user: {
       type: UserType,
