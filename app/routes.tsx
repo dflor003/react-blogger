@@ -38,7 +38,7 @@ export default class AppRoutes extends Component<any, any> implements ChildConte
 
   render() {
     const auth = this.auth;
-    const requiresAuth = (nextState, replace) => {
+    const requireAuth = (nextState, replace) => {
       if (!auth.isLoggedIn()) {
         replace({ pathname: '/login' })
       }
@@ -50,11 +50,11 @@ export default class AppRoutes extends Component<any, any> implements ChildConte
           <IndexRedirect to="/posts"/>
           <Route path="/posts" component={Home}/>
           <Route path="/posts/:id" component={BlogPost}/>
-          <Route path="/my-posts" component={MyPosts}/>
-          <Route path="/new-post" component={NewPost}/>
+          <Route path="/my-posts" component={MyPosts} onEnter={requireAuth}/>
+          <Route path="/new-post" component={NewPost} onEnter={requireAuth}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
-          <Route path="/profile" component={Profile}/>
+          <Route path="/profile" component={Profile} onEnter={requireAuth} />
           <Route path="/access_token=:token" component={Login}/>
           <Redirect from="/error=:error&error_description=:errorDescription" to="/login?error=:error&errorDescription=:errorDescription"/>
         </Route>
