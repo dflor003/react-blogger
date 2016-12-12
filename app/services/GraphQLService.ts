@@ -7,7 +7,7 @@ export class GraphQLService {
 
   constructor() {
     // TODO: Inject config
-    this.endpoint = `http://localhost:3001/graphql`
+    this.endpoint = process.env.GRAPHQL_ENDPOINT || `http://localhost:3001/graphql`;
   }
 
   async request(query: string, variables?: Object): Promise<any> {

@@ -13,7 +13,7 @@ const isDebug = true;
 
 module.exports = {
   debug: isDebug,
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: {
     polyfills: './app/polyfills.tsx',
     vendor: './app/vendor.tsx',
@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['react-hot', 'awesome-typescript-loader?configFileName=./app/tsconfig.json'],
+        loaders: ['awesome-typescript-loader?configFileName=' + root('app', 'tsconfig.json')],
         include: root('app')
       },
       // {
@@ -78,7 +78,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'ENV': JSON.stringify(isDebug ? 'DEV' : 'PRODUCTION')
+        ENV: JSON.stringify(isDebug ? 'DEV' : 'PRODUCTION'),
+        OAUTH_CLIENT_ID: process.env.OAUTH_CLIENT_ID,
+        OAUTH_DOMAIN: process.env.OAUTH_DOMAIN,
+        GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
       }
     }),
     new ExtractTextPlugin('css/[name].[hash].css'),

@@ -25,8 +25,8 @@ export default class AppRoutes extends Component<any, any> implements ChildConte
 
   constructor() {
     super();
-    const clientId = '6PCPeiJR2EVqk2wf9QwiQ6eIEUBUc8hN';
-    const domain = 'danilf.auth0.com';
+    const clientId = process.env.OAUTH_CLIENT_ID || '6PCPeiJR2EVqk2wf9QwiQ6eIEUBUc8hN';
+    const domain = process.env.OAUTH_DOMAIN || 'danilf.auth0.com';
     this.auth = new AuthService(clientId, domain);
   }
 
