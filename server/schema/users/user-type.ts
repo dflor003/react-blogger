@@ -27,6 +27,14 @@ export const UserType: any = new GraphQLObjectType({
       type: GraphQLString,
       description: `The user's email address`
     },
+    pictureSmallUrl: {
+      type: GraphQLString,
+      description: `The profile picture thumbnail`
+    },
+    pictureLargeUrl: {
+      type: GraphQLString,
+      description: `The profile picture full`
+    },
     posts: {
       type: new GraphQLList(PostType),
       description: `The posts that the user has authored`,

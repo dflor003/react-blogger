@@ -40,6 +40,16 @@ export default build<UserData>('users', db => {
         allowNull: false,
         field: 'email'
       },
+      pictureSmallUrl: {
+        type: Sql.STRING(1024),
+        allowNull: true,
+        field: 'pictureSmallUrl'
+      },
+      pictureLargeUrl: {
+        type: Sql.STRING(1024),
+        allowNull: true,
+        field: 'pictureLargeUrl'
+      },
     },
     {
       freezeTableName: true

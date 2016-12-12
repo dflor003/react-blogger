@@ -13,8 +13,8 @@ export class GraphQLService {
   async request(query: string, variables?: Object): Promise<any> {
     const endpoint = this.endpoint;
     log.info(`Making GraphQL Request to ${endpoint}:`);
-    log.info(`Query: ${query}`);
-    log.info(`Variables: ${variables}`);
+    log.info(`Query:`, query);
+    log.info(`Variables:`, variables);
 
     const response = await fetch(endpoint, {
       method: 'POST',

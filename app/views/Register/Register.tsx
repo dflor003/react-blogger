@@ -40,13 +40,7 @@ export default class Register extends Component<any, any> {
   componentDidMount() {
     const auth: AuthService = this.context.auth;
     const userProfile = auth.getProfile();
-    this.setState({
-      id: userProfile.id,
-      firstName: userProfile.firstName,
-      lastName: userProfile.lastName,
-      email: userProfile.email,
-      pictureLargeUrl: userProfile.pictureLargeUrl
-    });
+    this.setState(userProfile);
 
     log.info(`User hit registration with data`, this.state);
   }
@@ -54,23 +48,31 @@ export default class Register extends Component<any, any> {
   async registerUser(userData: any) {
     log.info(`User registering with data`, userData);
     try {
+      const auth: AuthService = this.context.auth;
       const result = await graphql(`
         mutation addUser(
-          $id: String!
+          $externalId: String!
           $firstName: String!
           $lastName: String!
           $email: String!
+          $pictureSmallUrl: String
+          $pictureLargeUrl: String
           ) {
           addUser(
-            externalId: $id
+            externalId: $externalId
             firstName: $firstName
             lastName: $lastName
             email: $email
+            pictureSmallUrl: $pictureSmallUrl
+            pictureLargeUrl: $pictureLargeUrl
           ) {
             id
           }
         }
       `, userData);
+      const profile = auth.getProfile();
+      profile.id = result.id;
+      auth.setProfile(profile.toData());
       log.info(`Created user successfully`);
       this.props.router.replace('/home');
     } catch (err) {
@@ -92,7 +94,10 @@ export default class Register extends Component<any, any> {
           about yourself.
         </p>
 
-        <Form horizontal onSubmit={() => this.registerUser(this.state)}>
+        <Form horizontal onSubmit={(evt) => {
+          this.registerUser(this.state);
+          evt.preventDefault();
+        }}>
           <Row>
             <Col sm={3}>
               <Image src={this.state.pictureLargeUrl} responsive rounded/>
