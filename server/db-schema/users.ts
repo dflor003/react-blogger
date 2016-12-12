@@ -20,6 +20,11 @@ export default build<UserData>('users', db => {
         allowNull: false,
         field: 'id'
       },
+      externalId: {
+        type: Sql.STRING(255),
+        allowNull: true,
+        field: 'externalId'
+      },
       firstName: {
         type: Sql.STRING(100),
         allowNull: false,

@@ -8,9 +8,9 @@ export const addUser = {
     type: UserType,
     description: 'Adds a user',
     args: {
-      id: {
+      externalId: {
         type: GraphQLString,
-        description: 'The id of the user'
+        description: 'The external id of the user'
       },
       firstName: {
         type: new GraphQLNonNull(GraphQLString),

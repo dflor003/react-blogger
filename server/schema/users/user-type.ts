@@ -11,6 +11,10 @@ export const UserType: any = new GraphQLObjectType({
       type: GraphQLString,
       description: `The user's id`
     },
+    externalId: {
+      type: GraphQLString,
+      description: `An external identifier for the user from the auth system`
+    },
     firstName: {
       type: GraphQLString,
       description: `The user's first name`
