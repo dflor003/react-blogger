@@ -12,6 +12,10 @@ export const addPost = {
         type: new GraphQLNonNull(GraphQLString),
         description: 'The id of the author of the post'
       },
+      title: {
+        type: new GraphQLNonNull(GraphQLString),
+        description: 'The title of the blog post'
+      },
       content: {
         type: new GraphQLNonNull(GraphQLString),
         description: `The content of the post`

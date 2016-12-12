@@ -10,17 +10,14 @@ import AuthService from '../../services/AuthService';
 export default class Layout extends Component<any, any> {
   static propTypes = {
     appName: PropTypes.string,
-    children: PropTypes.node
-  };
-
-  static contextTypes = {
+    children: PropTypes.node,
     auth: PropTypes.instanceOf(AuthService)
   };
 
   render() {
     const appName = this.props.appName;
     const children = this.props.children;
-    console.log('Layout', this.props);
+    const auth: AuthService = this.props.auth;
 
     return (
       <div className={styles.root}>
@@ -46,9 +43,10 @@ export default class Layout extends Component<any, any> {
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
                 <NavLink to="/home">Home</NavLink>
+                <NavLink to="/my-posts" visible={auth.isLoggedIn()}>My Posts</NavLink>
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <LoginStatus auth={this.context.auth}/>
+                <LoginStatus auth={auth}/>
               </ul>
             </div>
           </div>

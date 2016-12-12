@@ -2,9 +2,15 @@ import * as React from 'react';
 import {Component, PropTypes} from 'react';
 import {RouterOnContext, Link} from 'react-router';
 
-export default class NavLink extends Component<any, any> {
+export interface NavLinkProps {
+  to: string;
+  visible?: boolean;
+}
+
+export default class NavLink extends Component<NavLinkProps, any> {
   static propTypes = {
-    to: PropTypes.string
+    to: PropTypes.string.isRequired,
+    visible: PropTypes.bool
   };
 
   static contextTypes = {
@@ -15,10 +21,15 @@ export default class NavLink extends Component<any, any> {
     const router: RouterOnContext = this.context.router;
     const isActive = router.isActive(this.props.to, true);
     const className = isActive ? 'active' : '';
+    const { visible, ...others } = this.props;
+
+    if (visible === false) {
+      return null;
+    }
 
     return (
       <li className={className}>
-        <Link {...this.props} />
+        <Link {...others} />
       </li>
     );
   }

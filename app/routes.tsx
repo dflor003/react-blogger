@@ -8,6 +8,8 @@ import Login from './views/Login/Login';
 import Register from './views/Register/Register';
 import Profile from './views/Profile/Profile';
 import AuthService from './services/AuthService';
+import MyPosts from './views/MyPosts/MyPosts';
+import NewPost from './views/NewPost/NewPost';
 
 interface IContext {
   auth: AuthService;
@@ -46,6 +48,8 @@ export default class AppRoutes extends Component<any, any> implements ChildConte
         <Route path="/" component={App}>
           <IndexRedirect to="/home"/>
           <Route path="/home" component={Home}/>
+          <Route path="/my-posts" component={MyPosts}/>
+          <Route path="/new-post" component={NewPost}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/profile" component={Profile}/>

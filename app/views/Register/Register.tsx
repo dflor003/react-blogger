@@ -6,22 +6,9 @@ import {Form, Col, Row, Alert, FormControl, FormGroup, ControlLabel, Image, Butt
 import AuthService from '../../services/AuthService';
 import logger from '../../../server/utils/logger/logger';
 import graphql from '../../services/GraphQLService';
-
-const lblSize = 3;
-const textSize = 12 - lblSize;
-const field = (id: string, label: string, value: any, onChange: any) => (
-  <FormGroup>
-    <Col sm={lblSize}>
-      <ControlLabel htmlFor={id}>{label}</ControlLabel>
-    </Col>
-    <Col sm={textSize}>
-      <FormControl id={id} type="text" placeholder={`Enter ${label}`} value={value} onChange={onChange}/>
-    </Col>
-  </FormGroup>
-);
+import {InputField} from '../../components/Fields/InputField';
 
 const log = logger('REGISTER');
-
 export default class Register extends Component<any, any> {
   constructor() {
     super();
@@ -103,9 +90,15 @@ export default class Register extends Component<any, any> {
               <Image src={this.state.pictureLargeUrl} responsive rounded/>
             </Col>
             <Col sm={9}>
-              {field('firstName', 'First Name', this.state.firstName, onValueChanged('firstName'))}
-              {field('lastName', 'Last Name', this.state.lastName, onValueChanged('lastName'))}
-              {field('emailAddress', 'Email Address', this.state.email, onValueChanged('emailAddress'))}
+              <InputField
+                id="firstName" label="First Name" value={this.state.firstName} horizontal
+                onChange={val => this.setState({...this.state, firstName: val})}/>
+              <InputField
+                id="lastName" label="Last Name" value={this.state.lastName} horizontal
+                onChange={val => this.setState({...this.state, lastName: val})}/>
+              <InputField
+                id="emailAddress" label="Email Address" value={this.state.emailAddress} horizontal
+                onChange={val => this.setState({...this.state, emailAddress: val})}/>
               <Button type="submit" bsStyle="primary" block={true}>Confirm</Button>
             </Col>
           </Row>

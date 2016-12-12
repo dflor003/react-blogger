@@ -22,23 +22,14 @@ const field = (label: string, value: any) => (
 );
 
 export default class Profile extends Component<any, any> {
-  static propTypes = {
-    params: PropTypes.shape({
-      error: PropTypes.string,
-      errorDescription: PropTypes.string
-    })
-  };
-
   static contextTypes = {
     auth: PropTypes.instanceOf(AuthService).isRequired
   };
 
   render() {
-
     const auth: AuthService = this.context.auth;
     const userProfile = auth.getProfile();
     log.info('Loaded with profile', userProfile);
-
 
     return (
       <Panel header="Profile" className={styles.root}>

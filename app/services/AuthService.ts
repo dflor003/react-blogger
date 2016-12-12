@@ -38,6 +38,10 @@ export default class AuthService {
     return !!this.getToken();
   }
 
+  loggedInUserId(): string {
+    return this.getProfile().id;
+  }
+
   login(): void {
     this.lock.show();
   }
