@@ -35,14 +35,14 @@ export default class Layout extends Component<any, any> {
                 <span className="icon-bar"/>
               </button>
 
-              <Link className="navbar-brand" to="/home">
+              <Link className="navbar-brand" to="/posts">
                 {appName}
               </Link>
             </div>
 
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
-                <NavLink to="/home">Home</NavLink>
+                <NavLink to="/posts">Home</NavLink>
                 <NavLink to="/my-posts" visible={auth.isLoggedIn()}>My Posts</NavLink>
               </ul>
               <ul className="nav navbar-nav navbar-right">

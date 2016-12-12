@@ -1,11 +1,11 @@
-import {GraphQLString, GraphQLList} from 'graphql';
+import {GraphQLString} from 'graphql';
 import {resolve} from '../helpers/resolver';
 import {PostType} from './post-type';
 import posts from '../../db-schema/posts';
 
 export const postById = {
   postById: {
-    type: new GraphQLList(PostType),
+    type: PostType,
     description: 'Gets a post by its id',
     args: {
       id: {

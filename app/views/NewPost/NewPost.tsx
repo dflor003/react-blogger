@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {Panel, Button, Form, FormGroup, FormControl, ControlLabel, Row, Col} from 'react-bootstrap';
+import {Button, Form} from 'react-bootstrap';
+import {FaPlusCircle} from 'react-icons/lib/fa';
 
 import AuthService from '../../services/AuthService';
-import BlogPostSummary from '../../components/BlogPostSummary/BlogPostSummary';
 import logger from '../../../server/utils/logger/logger';
 import graphql from '../../services/GraphQLService';
-import {FaPlusCircle} from 'react-icons/lib/fa';
 import {InputField} from '../../components/Fields/InputField';
 import {TextAreaField} from '../../components/Fields/TextAreaField';
 

@@ -1,19 +1,11 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import {Component, PropTypes} from 'react';
-
-export interface PartialBlogPost {
-  id: string;
-  title: string;
-  datetime: string;
-  author: {
-    firstName: string;
-    lastName: string;
-  }
-}
+import {Link, hashHistory} from 'react-router';
+import {BlogPost} from '../BlogPostDetail/BlogPostDetail';
 
 interface BlogPostSummaryProps {
-  post: PartialBlogPost;
+  post: BlogPost;
   isSelf?: boolean;
 }
 
@@ -34,9 +26,8 @@ export default class BlogPostSummary extends Component<BlogPostSummaryProps, voi
     const { post } = this.props;
     const isSelf = typeof this.props.isSelf === 'boolean' ? this.props.isSelf : false;
 
-
     return (
-      <div key={post.id}>
+      <div onClick={() => hashHistory.replace(`/posts/${post.id}`)} style={{cursor: 'pointer'}}>
         <h3>
           {post.title} <br/>
           {

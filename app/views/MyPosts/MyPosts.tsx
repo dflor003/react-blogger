@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {Panel, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
+import {FaPlusCircle} from 'react-icons/lib/fa';
 
 import AuthService from '../../services/AuthService';
-import BlogPostSummary from '../../components/BlogPostSummary/BlogPostSummary';
 import logger from '../../../server/utils/logger/logger';
 import graphql from '../../services/GraphQLService';
-import {FaPlusCircle} from 'react-icons/lib/fa';
 import BlogPostList from '../../components/BlogPostList/BlogPostList';
 
 const log = logger('MY-POSTS');

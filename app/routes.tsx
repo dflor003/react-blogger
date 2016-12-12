@@ -10,6 +10,7 @@ import Profile from './views/Profile/Profile';
 import AuthService from './services/AuthService';
 import MyPosts from './views/MyPosts/MyPosts';
 import NewPost from './views/NewPost/NewPost';
+import BlogPost from './views/BlogPost/BlogPost';
 
 interface IContext {
   auth: AuthService;
@@ -46,8 +47,9 @@ export default class AppRoutes extends Component<any, any> implements ChildConte
     return (
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-          <IndexRedirect to="/home"/>
-          <Route path="/home" component={Home}/>
+          <IndexRedirect to="/posts"/>
+          <Route path="/posts" component={Home}/>
+          <Route path="/posts/:id" component={BlogPost}/>
           <Route path="/my-posts" component={MyPosts}/>
           <Route path="/new-post" component={NewPost}/>
           <Route path="/login" component={Login}/>

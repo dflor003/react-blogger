@@ -61,7 +61,7 @@ export default class Register extends Component<any, any> {
       profile.id = result.id;
       auth.setProfile(profile.toData());
       log.info(`Created user successfully`);
-      this.props.router.replace('/home');
+      this.props.router.replace('/posts');
     } catch (err) {
       log.error(`Failed to create user`, err);
     }

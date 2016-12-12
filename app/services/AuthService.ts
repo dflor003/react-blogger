@@ -83,7 +83,7 @@ export default class AuthService {
       const userInfo = await this.fetchUserServerInfo(openIdProfileData.user_id);
       if (!!userInfo) {
         this.setProfile(userInfo);
-        this.history.replace('/home');
+        this.history.replace('/posts');
       } else {
         const profile = UserProfileModel.fromOAUthProfile(openIdProfileData);
         this.setProfile(profile.toData());

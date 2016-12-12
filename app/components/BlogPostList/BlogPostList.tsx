@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {PartialBlogPost, default as BlogPostSummary} from '../BlogPostSummary/BlogPostSummary';
+import {BlogPost} from '../BlogPostDetail/BlogPostDetail';
+import BlogPostSummary from '../BlogPostSummary/BlogPostSummary';
 import logger from '../../../server/utils/logger/logger';
 
 interface BlogPostListProps {
-  posts: PartialBlogPost[];
+  posts: BlogPost[];
 }
 
 const log = logger('BLOG-POST-LIST');
