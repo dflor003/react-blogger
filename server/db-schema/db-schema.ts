@@ -1,6 +1,10 @@
 import * as Sql from 'sequelize';
-import userSchema from './user';
+import users from './users';
+import posts from './posts';
+import comments from './comments';
 
 export async function sync(force: boolean = false): Promise<void> {
-  await userSchema().sync({ force: force });
+  await users().sync({ force: force });
+  await posts().sync({ force: force });
+  await comments().sync({ force: force });
 }

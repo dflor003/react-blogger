@@ -16,10 +16,10 @@ export default <AppConfig>{
   debug: asBool('DEBUG', true),
   port: asInt('PORT', 3001),
   db: {
-    database: asString('DB_DATABASE', null),
-    username: asString('DB_USER', null),
-    password: asString('DB_PASS', null),
-    server: asString('DB_SERVER', null),
-    port: asInt('DB_PORT', null),
+    database: asString('DB_DATABASE', 'blogger'),
+    username: asString('DB_USER', 'postgres'),
+    password: asString('DB_PASS', 'P@$$w0rd'),
+    server: asString('DB_SERVER', 'localhost'),
+    port: asInt('DB_PORT', 5432),
   }
 };

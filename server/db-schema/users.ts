@@ -1,7 +1,7 @@
 import * as Sql from 'sequelize';
 import build from './schema-builder';
 
-export interface IUserData {
+export interface UserData {
   id: string;
   firstName: string;
   lastName: string;
@@ -10,8 +10,8 @@ export interface IUserData {
   updatedAt?: Date;
 }
 
-export default build<IUserData>('user', db => {
-  return db.define<IUserData, IUserData>(
+export default build<UserData>('users', db => {
+  return db.define<UserData, UserData>(
     'users',
     {
       id: {
