@@ -18,7 +18,7 @@ export default <AppConfig>{
   db: {
     database: asString('DB_DATABASE', 'blogger'),
     username: asString('DB_USER', 'postgres'),
-    password: asString('DB_PASS', 'P@$$w0rd'),
+    password: asString('DB_PASS', 'password'),
     server: asString('DB_SERVER', 'localhost'),
     port: asInt('DB_PORT', 5432),
   }

@@ -11,7 +11,7 @@ services:
       PORT: '3001'
       DB_DATABASE: 'blogger'
       DB_USER: 'postgres'
-      DB_PASS: 'P@$$w0rd'
+      DB_PASS: 'password'
       DB_SERVER: 'db'
       DB_PORT: '5432'
 
@@ -22,4 +22,4 @@ services:
     environment:
       POSTGRES_DB: 'blogger'
       POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'P@$$w0rd'
+      POSTGRES_PASSWORD: 'password'

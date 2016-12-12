@@ -15,7 +15,7 @@ export interface CommentData {
 
 export default build<CommentData>('comments', db => {
   return db.define<CommentData, CommentData>(
-    'posts',
+    'comments',
     {
       id: {
         primaryKey: true,
@@ -26,6 +26,7 @@ export default build<CommentData>('comments', db => {
       postId: {
         type: Sql.UUID,
         allowNull: false,
+        field: 'postId',
         references: {
           model: posts(),
           key: 'id'
@@ -34,6 +35,7 @@ export default build<CommentData>('comments', db => {
       userId: {
         type: Sql.UUID,
         allowNull: false,
+        field: 'userId',
         references: {
           model: users(),
           key: 'id'

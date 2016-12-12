@@ -4,13 +4,16 @@ import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as uuid from 'uuid';
-import { Request, Response } from 'express';
-import { NotFoundError, HttpError } from './utils/errors';
-import { HttpStatus } from './utils/http-status';
-import { connection } from './db'
+import * as graphqlHttp from 'express-graphql';
+import {Request, Response} from 'express';
+import {NotFoundError, HttpError} from './utils/errors';
+import {HttpStatus} from './utils/http-status';
+import {connection} from './db'
 import logger from './utils/logger';
 import config from './config';
 import controllers from './controllers';
+import GraphqlSchema  from './schema';
+import {allSchema} from './db-schema/db-schema';
 
 const log = logger('STARTUP');
 
@@ -22,6 +25,7 @@ function run(root: string = __dirname): void {
 
   // Initialize db connection
   connection().init(config);
+  allSchema();
 
   // CORS for client-side
   app.use(cors());
@@ -34,6 +38,16 @@ function run(root: string = __dirname): void {
   app.disable('etag'); // Disables etags for JSON requests
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  // Graphql
+  app.use('/graphql', graphqlHttp({
+    schema: GraphqlSchema,
+    graphiql: true,
+    formatError: (err: Error) => {
+      log.error(`Error processing graphql query`, err);
+      return err;
+    }
+  }));
 
   // Routes
   controllers.forEach(controller => app.use(controller.routes()));

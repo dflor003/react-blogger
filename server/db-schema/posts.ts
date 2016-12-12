@@ -29,6 +29,11 @@ export default build<PostData>('posts', db => {
           key: 'id'
         }
       },
+      title: {
+        type: Sql.STRING(500),
+        allowNull: false,
+        field: 'title'
+      },
       content: {
         type: Sql.TEXT,
         allowNull: false,
