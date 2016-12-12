@@ -3,11 +3,11 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
+import * as uuid from 'uuid';
 import { Request, Response } from 'express';
 import { NotFoundError, HttpError } from './utils/errors';
 import { HttpStatus } from './utils/http-status';
 import { connection } from './db'
-import uuid from 'uuid';
 import logger from './utils/logger';
 import config from './config';
 import controllers from './controllers';
@@ -48,7 +48,7 @@ function run(root: string = __dirname): void {
   const routeLogger = logger('ROUTE-ERR');
   app.use((err: HttpError, req: Request, res: Response, next: Function) => {
     const errorId = uuid(),
-      status = err.status || 500,
+      status = err.status || HttpStatus.InternalServerError,
       stack = err.stack;
 
     // Send error response

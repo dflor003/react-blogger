@@ -1,0 +1,43 @@
+import * as Sql from 'sequelize';
+import build from './schema-builder';
+
+export interface IUserData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export default build<IUserData>('user', db => {
+  return db.define<IUserData, IUserData>(
+    'users',
+    {
+      id: {
+        primaryKey: true,
+        type: Sql.UUID,
+        allowNull: false,
+        field: 'id'
+      },
+      firstName: {
+        type: Sql.STRING(100),
+        allowNull: false,
+        field: 'firstName'
+      },
+      lastName: {
+        type: Sql.STRING(100),
+        allowNull: false,
+        field: 'lastName'
+      },
+      email: {
+        type: Sql.STRING(100),
+        allowNull: false,
+        field: 'email'
+      },
+    },
+    {
+      freezeTableName: true
+    }
+  );
+});
