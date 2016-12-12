@@ -5,6 +5,7 @@ import {allPosts} from './posts/all-posts';
 import {postById} from './posts/post-by-id';
 import {userExists} from './users/user-exists';
 import {userByExternalId} from './users/user-by-external-id';
+import {commentsForPost} from './comments/comments-for-post';
 
 const queries: GraphQLFieldConfigMap<any, any>[] = [
   allUsers,
@@ -12,7 +13,8 @@ const queries: GraphQLFieldConfigMap<any, any>[] = [
   userById,
   postById,
   userExists,
-  userByExternalId
+  userByExternalId,
+  commentsForPost
 ];
 
 export const RootQuery = new GraphQLObjectType({

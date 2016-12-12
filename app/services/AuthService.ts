@@ -48,6 +48,7 @@ export default class AuthService {
 
   logout(): void {
     this.storage.remove(TokenKey);
+    this.storage.remove(ProfileKey);
   }
 
   getToken(): string {
@@ -60,13 +61,12 @@ export default class AuthService {
 
   getProfile(): UserProfileModel {
     const userProfileData = this.storage.get<UserProfileData>(ProfileKey);
-    return new UserProfileModel(userProfileData);
+    return !!userProfileData ? new UserProfileModel(userProfileData) : null;
   }
 
   setProfile(profile: UserProfileData): void {
     this.storage.set(ProfileKey, profile);
   }
-
 
   private async authenticate(authResult: any): Promise<void> {
     log.info(`User authenticated successfully!`);
@@ -103,6 +103,8 @@ export default class AuthService {
           firstName
           lastName
           email
+          pictureSmallUrl
+          pictureLargeUrl
           externalId
         }
       }
