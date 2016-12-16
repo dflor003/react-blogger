@@ -9,7 +9,7 @@ services:
     environment:
       OAUTH_CLIENT_ID: '6PCPeiJR2EVqk2wf9QwiQ6eIEUBUc8hN'
       OAUTH_DOMAIN: 'danilf.auth0.com'
-      GRAPHQL_ENDPOINT: 'http://server:3001/graphql'
+      GRAPHQL_ENDPOINT: 'http://localhost:3001/graphql'
 
   server:
     build:
