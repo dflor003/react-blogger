@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loaders: ['awesome-typescript-loader?configFileName=' + root('app', 'tsconfig.json')],
+        loaders: ['babel-loader', 'awesome-typescript-loader?configFileName=' + root('app', 'tsconfig.json')],
         include: root('app')
       },
       // {
@@ -79,9 +79,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         ENV: JSON.stringify(isDebug ? 'DEV' : 'PRODUCTION'),
-        OAUTH_CLIENT_ID: process.env.OAUTH_CLIENT_ID,
-        OAUTH_DOMAIN: process.env.OAUTH_DOMAIN,
-        GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
+        OAUTH_CLIENT_ID: JSON.stringify(process.env.OAUTH_CLIENT_ID),
+        OAUTH_DOMAIN: JSON.stringify(process.env.OAUTH_DOMAIN),
+        GRAPHQL_ENDPOINT: JSON.stringify(process.env.GRAPHQL_ENDPOINT),
       }
     }),
     new ExtractTextPlugin('css/[name].[hash].css'),

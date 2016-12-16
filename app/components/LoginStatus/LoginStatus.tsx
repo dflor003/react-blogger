@@ -32,9 +32,10 @@ export default class LoginStatus extends Component<ILoginStatusProps, any> {
 
   render() {
     const auth = this.props.auth;
-    const isLoggedIn = auth.isLoggedIn();
+    const userProfile = auth.getProfile();
+    const isLoggedIn = auth.isLoggedIn() && !!userProfile;
     return isLoggedIn
-      ? loggedInComponent(auth.getProfile().username, () => this.logout())
+      ? loggedInComponent(userProfile.username, () => this.logout())
       : loggedOutComponent();
   }
 
